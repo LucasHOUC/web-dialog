@@ -8,13 +8,82 @@ body {
     padding: 20px;
 }
 
-button {
-    display: block;
+/*button {*/
+/*display: block;*/
+/*width: 100%;*/
+/*padding: 10px;*/
+/*margin: 20px 0;*/
+/*background-color: green;*/
+/*border-radius: 10px;*/
+/*color: #fff;*/
+/*border: 1px solid #eee;*/
+/*}*/
+
+.g-dialog-container {
+    position: fixed;
+    left: 0;
+    top: 0;
     width: 100%;
-    padding: 10px;
-    margin: 20px 0;
-    background-color: green;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-window {
+    padding: 1em;
     border-radius: 10px;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.dialog-header {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.dialog-header.ok {
+    background: url("images/redtrue.png") no-repeat 0 0;
+    background-size: 50px;
+}
+
+.dialog-header.warning {
+    background: url("images/investTicket-close.png") no-repeat 0 0;
+    background-size: 50px;
+}
+
+.dialog-header.waiting {
+    background: url("images/loading2.gif") no-repeat 0 0;
+    background-size: 50px;
+}
+
+.dialog-content {
+    padding: 1em 1em 0;
     color: #fff;
-    border: 1px solid #eee;
+    line-height: 180%;
+    text-align: center;
+}
+
+.dialog-footer {
+    padding: 1em 1em 0;
+}
+
+.dialog-footer > button {
+    -webkit-appearance: none;
+    background-color: rgba(255, 255, 255, .8);
+    padding: 0.8em 1.8em;
+    border: none;
+    color: #eee;
+    border-radius: 5px;
+    margin: 0 0.3em;
+    text-shadow: #666 1px 1px 0;
+}
+
+.dialog-footer > button.green {
+    background-color: rgba(2, 202, 200, .8);
+}
+
+.dialog-footer > button.red {
+    background-color: rgba(251, 23, 50, .8);
 }
