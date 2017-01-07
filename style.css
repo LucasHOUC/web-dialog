@@ -7,3 +7,14 @@ body {
     font-size: 12px;
     padding: 20px;
 }
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: green;
+    border-radius: 10px;
+    color: #fff;
+    border: 1px solid #eee;
+}
