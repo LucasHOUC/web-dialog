@@ -14,15 +14,15 @@
 </head>
 <body>
 <!--<div class="g-dialog-container">-->
-    <!--<div class="dialog-window">-->
-        <!--<div class="dialog-header waiting"></div>-->
-        <!--<div class="dialog-content">你是否要清空购物车？</div>-->
-        <!--<div class="dialog-footer">-->
-            <!--<button class="green">按钮1</button>-->
-            <!--<button class="red">按钮2</button>-->
-            <!--<button>按钮3</button>-->
-        <!--</div>-->
-    <!--</div>-->
+<!--<div class="dialog-window">-->
+<!--<div class="dialog-header waiting"></div>-->
+<!--<div class="dialog-content">你是否要清空购物车？</div>-->
+<!--<div class="dialog-footer">-->
+<!--<button class="green">按钮1</button>-->
+<!--<button class="red">按钮2</button>-->
+<!--<button>按钮3</button>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->
 
 <button id="btn1">没有传递任何参数（需手动关闭）</button>
@@ -36,7 +36,13 @@
 <script src="touch.js"></script>
 <script src="zepto.dialog.js"></script>
 <script>
-    var d = new Dialog();
+    var d = new Dialog({
+        width: 100,
+        message: '你还好吗？',
+        type: 'waiting',
+        delay: 3000,
+        maskOpacity: 0.4
+    });
 </script>
 </body>
 </html>

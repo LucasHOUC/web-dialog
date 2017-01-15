@@ -65,8 +65,41 @@
                 mask.append(win);
                 body.append(mask);
             } else {
+                //根据配置参数创建相应的弹框
+                header.addClass(config.type);
+                win.append(header);
+                //如果传了信息文本
+                if (config.message) {
+                    win.append(content.html(config.message));
+                }
+                //按钮组
+                if (config.buttons) {
+                    //------------------->
+                    win.append(footer);
+                }
+                //插入到页面
+                mask.append(win);
+                body.append(mask);
+                //设置对话框的宽度
+                if (config.width != 'auto') {
+                    win.width(config.width);
+                }
+                //对话框遮罩透明度
+                if (config.maskOpacity) {
+                    mask.css('backgroundColor', 'rgba(0, 0, 0, ' + config.maskOpacity + ')');
+                }
+                //设置弹出框关闭时间
+                if (config.delay && config.delay != 0) {
+                    window.setTimeout(function () {
+                        _this_.close();
+                    }, config.delay);
+                }
 
             }
+        },
+
+        close: function () {
+            this.mask.remove();
         }
     };
 
