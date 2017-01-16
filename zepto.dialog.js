@@ -74,7 +74,7 @@
                 }
                 //按钮组
                 if (config.buttons) {
-                    //------------------->
+                    this.createButtons(footer, config.buttons);
                     win.append(footer);
                 }
                 //插入到页面
@@ -90,12 +90,40 @@
                 }
                 //设置弹出框关闭时间
                 if (config.delay && config.delay != 0) {
-                    window.setTimeout(function () {
+                    window.setTimeout(function (i) {
                         _this_.close();
                     }, config.delay);
                 }
 
             }
+        },
+        //根据配置参数的buttons创建按钮列表
+        createButtons: function (footer, buttons) {
+            var _this_ = this;
+
+            $(buttons).each(function () {
+                //获取按钮的样式回调以及文本
+                var type = this.type ? ' class="' + this.type + '"' : '';
+                var btnText = this.text ? this.text : '按钮' + (++i);
+                var callback = this.callback ? this.callback : null;
+                var button = $('<button' + type + '>' + btnText + '</button>');
+
+                if (callback) {
+                    button.tap(function () {
+                        var isClose = callback();
+                        if (isClose != false) {
+                            _this_.close();
+                        }
+                    });
+                } else {
+                    button.tap(function () {
+                        _this_.close();
+                    });
+                }
+
+                footer.append(button);
+
+            });
         },
 
         close: function () {
@@ -104,5 +132,9 @@
     };
 
     window.Dialog = Dialog;
+
+    $.dialog = function (config) {
+        return new Dialog(config);
+    }
 
 })(Zepto);

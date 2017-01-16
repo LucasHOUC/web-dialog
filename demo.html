@@ -36,13 +36,124 @@
 <script src="touch.js"></script>
 <script src="zepto.dialog.js"></script>
 <script>
-    var d = new Dialog({
-        width: 100,
-        message: '你还好吗？',
-        type: 'waiting',
-        delay: 3000,
-        maskOpacity: 0.4
+    $('#btn1').tap(function () {
+        var d = $.dialog();
     });
+    $('#btn2').tap(function () {
+        var d = $.dialog(
+            {
+                type: 'warning',
+                message: '2秒后关闭',
+                delay: 2000
+            }
+        );
+    });
+    $('#btn3').tap(function () {
+        var d = $.dialog(
+            {
+                type: 'ok',
+                buttons: [{text: '确定'}, {text: '取消'}]
+            }
+        );
+    });
+    $('#btn4').tap(function () {
+        var d = $.dialog({
+            type: 'warning',
+            buttons: [
+                {
+                    type: 'red',
+                    text: '确定',
+                    callback: function () {
+                        return false;
+                    }
+                }
+            ]
+        });
+    });
+    $('#btn5').tap(function () {
+        var d = $.dialog(
+            {
+                type: 'waiting',
+                message: '多组合的按钮框，且样式可定制',
+                buttons: [
+                    {
+                        type: 'red',
+                        text: '确定'
+                    },
+                    {
+                        text: '查看'
+                    },
+                    {
+                        type: 'green',
+                        text: '取消'
+                    }
+                ]
+            }
+        );
+    });
+    $('#btn6').tap(function () {
+        var d6 = $.dialog(
+            {
+                type: 'warning',
+                message: '我叫警告框',
+                buttons: [
+                    {
+                        type: 'green',
+                        text: '确定',
+                        callback: function () {
+                            $.dialog({type: 'waiting', delay: 2000});
+                            return false;
+                        }
+                    },
+                    {
+                        type: 'red',
+                        text: '删除',
+                        callback: function () {
+                            $.dialog(
+                                {
+                                    type: 'warning',
+                                    buttons: [
+                                        {
+                                            text: '删除之前的弹出框',
+                                            callback: function () {
+                                                d6.close();
+                                                return false;
+                                            }
+                                        }
+                                    ]
+                                }
+                            );
+                            return false;
+                        }
+                    }
+                ]
+            }
+        );
+    });
+
+    //    var d = $.dialog({
+    ////        width: 100,
+    //        message: '你还好吗？',
+    //        type: 'waiting',
+    //        buttons: [
+    //            {
+    //                type: 'red',
+    //                text: '确定',
+    //                callback: function () {
+    //                    alert(1000);
+    //                    return false;
+    //                }
+    //            },
+    //            {
+    //                type: 'green',
+    //                text: '取消',
+    //                callback: function () {
+    //                    alert('cancel');
+    //                }
+    //            }],
+    ////        delay: 3000,
+    //        maskOpacity: 0.4
+    //    });
 </script>
 </body>
 </html>
