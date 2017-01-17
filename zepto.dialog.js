@@ -19,7 +19,9 @@
             //弹出框延迟多久关闭
             delay: null,
             //对话框遮罩层透明度
-            maskOpacity: null
+            maskOpacity: null,
+            //是否启用动画
+            effect: null
         };
         //默认参数扩展
         if (config && $.isPlainObject(config)) {
@@ -46,6 +48,14 @@
 
     };
     Dialog.prototype = {
+        //动画函数
+        animate: function () {
+            var _this_ = this;
+            this.win.css('transform', 'scale(0,0)');
+            window.setTimeout(function () {
+                _this_.win.css('transform', 'scale(1,1)');
+            }, 100);
+        },
         //创建弹出框
         create: function () {
 
@@ -62,6 +72,11 @@
             //就弹出一个等待的图标形式的弹框
             if (this.isConfig) {
                 win.append(header.addClass('waiting'));
+
+                if (config.effect) {
+                    this.animate();
+                }
+
                 mask.append(win);
                 body.append(mask);
             } else {
@@ -94,7 +109,9 @@
                         _this_.close();
                     }, config.delay);
                 }
-
+                if (config.effect) {
+                    this.animate();
+                }
             }
         },
         //根据配置参数的buttons创建按钮列表
