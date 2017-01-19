@@ -47,6 +47,8 @@
         this.create();
 
     };
+    //记录弹框的层级
+    Dialog.zIndex = 100;
     Dialog.prototype = {
         //动画函数
         animate: function () {
@@ -67,7 +69,9 @@
                 content = this.winContent,
                 footer = this.winFooter,
                 body = this.body;
-
+            //增加弹框的层级
+            Dialog.zIndex++;
+            this.mask.css('zIndex', Dialog.zIndex);
             //如果没有传递任何配置参数
             //就弹出一个等待的图标形式的弹框
             if (this.isConfig) {
