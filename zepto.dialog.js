@@ -18,8 +18,12 @@
             buttons: null,
             //弹出框延迟多久关闭
             delay: null,
+            //延时关闭的回调函数
+            delayCallback: null,
             //对话框遮罩层透明度
             maskOpacity: null,
+            //置顶遮罩层点击是否可以关闭
+            maskClose: null,
             //是否启用动画
             effect: null
         };
@@ -111,10 +115,18 @@
                 if (config.delay && config.delay != 0) {
                     window.setTimeout(function (i) {
                         _this_.close();
+                        //执行延时的回调函数
+                        config.delayCallback && config.delayCallback();
                     }, config.delay);
                 }
                 if (config.effect) {
                     this.animate();
+                }
+                //指定遮罩层点击是否可以关闭
+                if (config.maskClose) {
+                    mask.tap(function () {
+                        _this_.close();
+                    });
                 }
             }
         },
@@ -130,14 +142,18 @@
                 var button = $('<button' + type + '>' + btnText + '</button>');
 
                 if (callback) {
-                    button.tap(function () {
+                    button.tap(function (e) {
                         var isClose = callback();
+                        //阻止事件冒泡
+                        e.stopPropagation();
                         if (isClose != false) {
                             _this_.close();
                         }
                     });
                 } else {
-                    button.tap(function () {
+                    button.tap(function (e) {
+                        //阻止事件冒泡
+                        e.stopPropagation();
                         _this_.close();
                     });
                 }

@@ -32,6 +32,8 @@
 <button id="btn5">弹出一个多组合的按钮框，且按钮样式可定制</button>
 <button id="btn6">弹出一个确认和删除的框，点击确认弹出加载框2秒自动关闭，点击删除按钮把上一次框关闭</button>
 <button id="btn7">带动画的对话框</button>
+<button id="btn9" style="background-color:red">延时关闭加回调</button>
+<button id="btn10" style="background-color:red">遮罩层点击是否可以关闭</button>
 
 <script src="zepto.js"></script>
 <script src="touch.js"></script>
@@ -149,6 +151,36 @@
                 effect: true
             }
         );
+    });
+    $('#btn9').tap(function () {
+        $.dialog({
+            type: 'warning',
+            message: '延时关闭加回调',
+            delay: 2000,
+            delayCallback: function () {
+                alert('111');
+            }
+        })
+    });
+    $('#btn10').tap(function () {
+        $.dialog({
+            type: 'warning',
+            message: '遮罩层点击是否可以关闭',
+            buttons: [
+                {
+                    type: 'green',
+                    text: '按钮A'
+                },
+                {
+                    text: '按钮B',
+                    callback: function () {
+                        return false;
+                    }
+                }
+            ],
+            maskOpacity: 0.4,
+            maskClose: true
+        })
     });
 
     //    var d = $.dialog({
